@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Runtime
+namespace ObjectPool.Runtime
 {
     public class ObjectPool<TConfig, TFactory> : MonoBehaviour where TFactory : IFactory<TConfig>, new()
     {
@@ -9,7 +9,7 @@ namespace Runtime
         [SerializeField] private TConfig objectConfig;
         
         private static ObjectPool<TConfig, TFactory> _instance;
-        private int _amountOfNotes;
+        private int _amountOfObjects;
         public static ObjectPool<TConfig, TFactory> Instance
         {
             // checks with null because if object is destroyed it returns true but object is not null.
@@ -22,7 +22,7 @@ namespace Runtime
     
         void Awake()
         {
-            _amountOfNotes = amountToPool;
+            _amountOfObjects = amountToPool;
             
             if(Instance == null)
             {
@@ -41,7 +41,7 @@ namespace Runtime
         void OnEnable()
         {
             _pooledObjects = new List<GameObject>();
-            for(int i = 0; i < _amountOfNotes; i++)
+            for(int i = 0; i < _amountOfObjects; i++)
             {
                 CreateObject();
             }

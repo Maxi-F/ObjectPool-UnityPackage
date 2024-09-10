@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Runtime
+namespace ObjectPool.Runtime
 {
     public interface IFactory<in TConfig>
     {
